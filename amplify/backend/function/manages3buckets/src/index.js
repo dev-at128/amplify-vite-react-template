@@ -6,11 +6,14 @@ dotenv.config();
 const s3 = new AWS.S3();
 const bucketNameStorage = 'sp1ai-dev-app-result-bucket';
 const bucketNameKey = 'old-bucket-name.txt';
-
 export const handler = async (event) => {
   const sourceBucketName = 'sp1ai-dev-app-result-bucket';
   const sourcePrefix = 'zip/';
   let oldBucketName;
+
+  // URLのデフォルト値を設定
+  const url = event.url || 'https://ap-northeast-1.console.aws.amazon.com/s3/buckets/amplify-d2vls6biw1ryba-ma-amplifystoragebrowserdri-7ovnmq619bxc?region=ap-northeast-1&bucketType=general&tab=objects';
+  console.log('URL:', url);
 
   try {
     // S3から古いバケット名を取得
